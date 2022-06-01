@@ -9,7 +9,7 @@ export class Land {
     }
 
     removeParcel(parcel: Parcel): Parcel[] {
-        this.parcels = []
+        this.parcels = this.parcels.filter(p => p.name !== parcel.name)
         return this.parcels
     }
 }
