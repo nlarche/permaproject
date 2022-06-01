@@ -9,4 +9,11 @@ describe('Visualize cultivation land', () => {
     const cultureLand: Land = new Land()
     expect(cultureLand.addParcel({ name: 'parcel a'})).toEqual([{name: 'parcel a'}])
   })
+  it("should remove a parcel", () => {
+    const cultureLand: Land = new Land()
+    cultureLand.addParcel({ name: 'parcel a'})
+    expect(cultureLand.parcels.length).toEqual(1)
+    cultureLand.removeParcel({ name: 'parcel a'})
+    expect(cultureLand.parcels.length).toEqual(0)
+  })
 })

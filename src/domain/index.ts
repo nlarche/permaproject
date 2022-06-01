@@ -7,4 +7,9 @@ export class Land {
         this.parcels = [parcel, ...this.parcels]
         return this.parcels;
     }
+
+    removeParcel(parcel: Parcel): Parcel[] {
+        this.parcels = []
+        return this.parcels
+    }
 }
