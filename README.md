@@ -1,3 +1,8 @@
-# TS playground
+# Perma project
 
-Just a litte project to play with typescript and Jest
+Project to experience clean architecture / architecture hexagonal on frontend
+
+### Rules
+- TDD only
+- [Object Calisthenics](https://williamdurand.fr/2013/06/03/object-calisthenics/)
+
