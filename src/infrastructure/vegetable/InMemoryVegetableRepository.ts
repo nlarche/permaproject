@@ -14,19 +14,20 @@ export class InMemoryVegetableRepository implements VegetableRepository {
     ];
   }
 
-  list(): Vegetable[] {
-    return this.vegetables;
+  list(): Promise<Vegetable[]> {
+    return Promise.resolve(this.vegetables);
   }
 
   remove(vegetableId: VegetableId): void {
     this.vegetables = this.vegetables.filter((v) => v.id.id !== vegetableId.id);
   }
 
-  get(vegetableId: VegetableId): Vegetable {
+  get(vegetableId: VegetableId): Promise<Vegetable> {
     const vegetable = this.vegetables.find((v) => v.id.id === vegetableId.id);
     if (!vegetable) {
-      throw "vegetable not found";
+      const error = new Error("vegetable not found");
+      return Promise.reject(error);
     }
-    return vegetable;
+    return Promise.resolve(vegetable);
   }
 }

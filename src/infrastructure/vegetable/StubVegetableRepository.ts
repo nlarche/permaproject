@@ -17,11 +17,11 @@ export class StubVegetableRepository implements VegetableRepository {
     this.repository.add(name);
   }
 
-  get(vegetableId: VegetableId): Vegetable {
+  get(vegetableId: VegetableId): Promise<Vegetable> {
     return this.repository.get(vegetableId);
   }
 
-  list(): Vegetable[] {
+  list(): Promise<Vegetable[]> {
     return this.repository.list();
   }
 

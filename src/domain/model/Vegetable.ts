@@ -9,8 +9,8 @@ export interface Vegetable {
 }
 
 export interface VegetableRepository {
-  list: () => Vegetable[];
+  list: () => Promise<Vegetable[]>;
   add: (name: string) => void;
   remove: (vegetableId: VegetableId) => void;
-  get: (vegetableId: VegetableId) => Vegetable;
+  get: (vegetableId: VegetableId) => Promise<Vegetable>;
 }

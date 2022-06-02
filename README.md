@@ -1,6 +1,6 @@
 # Perma project
 
-Project to experience clean architecture / architecture hexagonal on frontend
+Project to experience clean architecture / architecture hexagonal / CQS on frontend
 
 01 - Aim
 

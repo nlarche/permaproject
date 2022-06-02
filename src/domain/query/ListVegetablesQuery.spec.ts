@@ -1,12 +1,13 @@
 import { StubVegetableRepository } from "../../infrastructure/vegetable/StubVegetableRepository";
-import { GetVegetablesQuery } from "../../domain/query/GetVegetablesQuery";
+import { ListVegetablesQuery } from "../../domain/query/ListVegetablesQuery";
 import { Vegetable } from "../model/Vegetable";
 
 describe("GetVegetablesQuery", () => {
-  it("should return a list of vegetables", () => {
+  it("should return a list of vegetables", async () => {
     let vegetables = [{ name: "Tomate" }, { name: "Carotte" }];
     const repo = new StubVegetableRepository(vegetables as Vegetable[]);
-    const query = new GetVegetablesQuery(repo);
-    expect(query.execute(undefined).length).toEqual(2);
+    const query = new ListVegetablesQuery(repo);
+    const list = await query.execute(undefined);
+    expect(list.length).toEqual(2);
   });
 });

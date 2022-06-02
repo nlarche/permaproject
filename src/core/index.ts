@@ -1,5 +1,5 @@
 export interface Query<T, R> {
-  execute(param: T): R;
+  execute(param: T): Promise<R>;
 }
 
 export interface Command<T> {
