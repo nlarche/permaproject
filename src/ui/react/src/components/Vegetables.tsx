@@ -1,39 +1,35 @@
-import { useCallback, useEffect, useState } from "react";
-import { ListVegetablesQuery } from "../../../../domain/query/ListVegetablesQuery";
-import { Vegetable } from "../../../../domain/model/Vegetable";
+import { useEffect, useState } from "react";
+import { Vegetable, VegetableId } from "../../../../domain/model/Vegetable";
 import VegetableForm from "./VegetableForm";
-import { vegetableRepository } from "./repository";
-import { RemoveVegetable } from "../../../../domain/command/RemoveVegetable";
+import { handleCommand, handleQuery, pubsub } from "./repository";
 
 function useVegetableList() {
   const [list, setList] = useState([] as Vegetable[]);
-  const effect = useCallback(() => {
+
+  useEffect(() => {
     function load() {
-      console.log("reload list");
-      new ListVegetablesQuery(vegetableRepository)
-        .execute(undefined)
-        .then((list) => setList(list));
+      handleQuery("ListVegetablesQuery", undefined).then((list) =>
+        setList(list as Vegetable[])
+      );
     }
 
+    pubsub.subscribe("removed", load);
+    pubsub.subscribe("added", load);
     load();
   }, []);
-  return [list, effect] as const;
+  return list;
 }
 
 export default function Vegetables() {
-  const [list, reload] = useVegetableList();
-  useEffect(() => {
-    reload();
-  }, []);
+  const list = useVegetableList();
 
   function remove(v: Vegetable) {
-    new RemoveVegetable(vegetableRepository).execute(v.id);
-    reload();
+    handleCommand<VegetableId>("RemoveVegetable", v.id);
   }
 
   return (
     <>
-      <VegetableForm onAdd={reload}></VegetableForm>
+      <VegetableForm></VegetableForm>
       <ul>
         {list.map((v) => (
           <li key={v.id.id}>

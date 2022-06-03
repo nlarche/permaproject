@@ -1,22 +1,16 @@
 import { FormEvent, useState } from "react";
 import { Vegetable } from "../../../../domain/model/Vegetable";
-import { AddVegetable } from "../../../../domain/command/AddVegetable";
-import { vegetableRepository } from "./repository";
+import { handleCommand } from "./repository";
 
-export default function VegetableForm({
-  onAdd,
-}: {
-  onAdd: () => void;
-}): JSX.Element {
+export default function VegetableForm(): JSX.Element {
   const [vegetable, setVegetable] = useState({ name: "" } as Vegetable);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    new AddVegetable(vegetableRepository).execute({
+    handleCommand("AddVegetable", {
       name: vegetable.name,
     });
     setVegetable({ name: "" } as Vegetable);
-    onAdd();
   }
 
   function onChange(e: FormEvent<HTMLInputElement>) {
