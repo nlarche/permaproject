@@ -1,5 +1,5 @@
 import { VegetableId, VegetableRepository } from "../../domain/model/Vegetable";
-import { Command } from "../../core";
+import { Command, CommandEvent } from "../../core";
 
 export class RemoveVegetable implements Command<VegetableId> {
   private repository: VegetableRepository;
@@ -8,7 +8,8 @@ export class RemoveVegetable implements Command<VegetableId> {
     this.repository = vegetableRepository;
   }
 
-  execute(vegetableId: VegetableId): void {
-    this.repository.remove(vegetableId);
+  async execute(vegetableId: VegetableId): Promise<CommandEvent> {
+    await this.repository.remove(vegetableId);
+    return { name: "removed" };
   }
 }
