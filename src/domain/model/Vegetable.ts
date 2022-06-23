@@ -6,6 +6,7 @@ export interface Vegetable {
   id: VegetableId;
   name: string;
   type: "annual" | "perennial";
+  seedingDate: number;
 }
 
 export interface VegetableRepository {

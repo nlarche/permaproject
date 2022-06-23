@@ -3,6 +3,7 @@ import { Command, EventBus, Query } from "../core";
 import { ListVegetablesQuery } from "../domain/query/ListVegetablesQuery";
 import { RemoveVegetable } from "../domain/command/RemoveVegetable";
 import { AddVegetable } from "../domain/command/AddVegetable";
+import { v4 as uuid } from "uuid";
 
 export type VegetableQueries = "ListVegetablesQuery";
 
@@ -17,7 +18,10 @@ export default function Hexagon(
   };
 
   const domainCommands: Record<VegetableCommands, Command<unknown>> = {
-    AddVegetable: new AddVegetable(vegetableRepository),
+    AddVegetable: new AddVegetable(vegetableRepository, {
+      getNewDate: () => new Date().getTime(),
+      getNewId: () => uuid(),
+    }),
     RemoveVegetable: new RemoveVegetable(vegetableRepository),
   };
 
