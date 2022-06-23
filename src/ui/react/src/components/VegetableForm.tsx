@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Vegetable } from "../../../../domain/model/Vegetable";
-import { handleCommand } from "./repository";
+import { handleCommand } from "../hexagone";
 
 export default function VegetableForm(): JSX.Element {
   const [vegetable, setVegetable] = useState({ name: "" } as Vegetable);

@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 import { Vegetable, VegetableId } from "../../../../domain/model/Vegetable";
-import { handleCommand } from "./repository";
+import { handleCommand } from "../hexagone";
 
 type VegetableComponentType = { vegetable: Vegetable };
 

@@ -1,14 +1,11 @@
-import { CommandEvent } from "./index";
+import { CommandEvent, EventBus, Topic } from "./index";
 
-interface Topic {
-  event: string;
-  handler: () => void;
-}
-
-export class PubSub {
+export class PubSub implements EventBus {
   private handlers: Set<Topic>;
 
   constructor() {
+    console.log("PubSub EventBus initialisation");
+
     this.handlers = new Set();
   }
 

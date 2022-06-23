@@ -9,3 +9,14 @@ export interface CommandEvent {
 export interface Command<T> {
   execute(param: T): Promise<CommandEvent>;
 }
+
+export interface EventBus {
+  subscribe(event: string, handler: () => void): void;
+
+  dispatch(event: CommandEvent): void;
+}
+
+export interface Topic {
+  event: string;
+  handler: () => void;
+}

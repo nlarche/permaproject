@@ -1,5 +1,5 @@
 import { Vegetable, VegetableId } from "../../../../domain/model/Vegetable";
-import { handleCommand } from "./repository";
+import { handleCommand } from "../hexagone";
 
 type VegetableItemParams = { vegetable: Vegetable };
 export default function VegetableItem(props: VegetableItemParams) {
