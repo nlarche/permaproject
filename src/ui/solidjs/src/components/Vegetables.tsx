@@ -5,15 +5,15 @@ import { createVegetableResource } from "./vegetableResource";
 import VegetableForm from "./VegetableForm";
 
 const Vegetables: Component = () => {
-  const { vegetables, refetch } = createVegetableResource();
+  const { vegetables } = createVegetableResource();
   return (
     <>
-      <VegetableForm refetch={refetch}></VegetableForm>
+      <VegetableForm></VegetableForm>
       <ul>
         <For each={vegetables()}>
           {(vegetable: Vegetable) => (
             <li>
-              <VegetableItem vegetable={vegetable} refetch={refetch} />
+              <VegetableItem vegetable={vegetable} />
             </li>
           )}
         </For>

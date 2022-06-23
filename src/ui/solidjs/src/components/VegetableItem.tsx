@@ -2,14 +2,13 @@ import { Component } from "solid-js";
 import { Vegetable, VegetableId } from "../../../../domain/model/Vegetable";
 import { handleCommand } from "./repository";
 
-type VegetableComponentType = { vegetable: Vegetable; refetch: () => void };
+type VegetableComponentType = { vegetable: Vegetable };
 
 const VegetableItem: Component<VegetableComponentType> = (
   props: VegetableComponentType
 ) => {
   function remove(v: Vegetable) {
     handleCommand<VegetableId>("RemoveVegetable", v.id);
-    props.refetch();
   }
 
   const { vegetable } = props;
