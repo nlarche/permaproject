@@ -5,6 +5,7 @@ import Vegetables from "./components/Vegetables";
 const App: Component = () => {
   return (
     <div class={styles.App}>
+      <h2>Solidjs</h2>
       <Vegetables />
     </div>
   );

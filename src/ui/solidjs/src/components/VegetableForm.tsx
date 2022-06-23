@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { Vegetable } from "../../../../domain/model/Vegetable";
 import { createStore } from "solid-js/store";
-import { handleCommand } from "./repository";
+import { handleCommand } from "../hexagone";
 
 type VegetableForm = Pick<Vegetable, "name">;
 
