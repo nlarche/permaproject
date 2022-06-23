@@ -1,5 +1,6 @@
 import { VegetableRepository } from "../../domain/model/Vegetable";
 import { Command, CommandEvent } from "../../core";
+import { v4 as uuid } from "uuid";
 
 export class AddVegetable implements Command<{ name: string }> {
   private repository: VegetableRepository;
@@ -9,7 +10,8 @@ export class AddVegetable implements Command<{ name: string }> {
   }
 
   async execute(param: { name: string }): Promise<CommandEvent> {
-    await this.repository.add(param.name);
+    const id = uuid();
+    await this.repository.add({ id: { id }, name: param.name, type: "annual" });
     return { name: "added" };
   }
 }

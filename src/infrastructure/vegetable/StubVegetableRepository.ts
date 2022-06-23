@@ -10,11 +10,11 @@ export class StubVegetableRepository implements VegetableRepository {
 
   constructor(vegetables: Vegetable[] = []) {
     this.repository = new InMemoryVegetableRepository();
-    vegetables.forEach((v) => this.add(v.name));
+    vegetables.forEach((vegetable) => this.add(vegetable));
   }
 
-  add(name: string): void {
-    this.repository.add(name);
+  add(vegetable: Vegetable): void {
+    this.repository.add(vegetable);
   }
 
   get(vegetableId: VegetableId): Promise<Vegetable> {
