@@ -9,6 +9,14 @@ export interface Vegetable {
   seedingDate: number;
 }
 
+export type Maturity = "JUVENILE" | "GROWING" | "READY" | "DYING" | "DEAD";
+
+export interface VegetableView {
+  id: VegetableId;
+  name: string;
+  maturity: Maturity;
+}
+
 export interface VegetableRepository {
   list: () => Promise<Vegetable[]>;
   add: (vegetable: Vegetable) => void;
