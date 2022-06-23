@@ -7,11 +7,8 @@ import {
 export class InMemoryVegetableRepository implements VegetableRepository {
   vegetables: Vegetable[] = [];
 
-  add(name: string): void {
-    this.vegetables = [
-      { id: { id: this.vegetables.length }, type: "annual", name },
-      ...this.vegetables,
-    ];
+  add(vegetable: Vegetable): void {
+    this.vegetables = [vegetable, ...this.vegetables];
   }
 
   list(): Promise<Vegetable[]> {

@@ -1,5 +1,5 @@
 export interface VegetableId {
-  id: number;
+  id: string;
 }
 
 export interface Vegetable {
@@ -10,7 +10,7 @@ export interface Vegetable {
 
 export interface VegetableRepository {
   list: () => Promise<Vegetable[]>;
-  add: (name: string) => void;
+  add: (vegetable: Vegetable) => void;
   remove: (vegetableId: VegetableId) => void;
   get: (vegetableId: VegetableId) => Promise<Vegetable>;
 }
