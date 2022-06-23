@@ -4,11 +4,8 @@ import { createStore } from "solid-js/store";
 import { handleCommand } from "./repository";
 
 type VegetableForm = Pick<Vegetable, "name">;
-type VegetableFormParams = { refetch: () => void };
 
-const VegetableForm: Component<VegetableFormParams> = (
-  props: VegetableFormParams
-) => {
+const VegetableForm: Component = () => {
   const [vegetable, setVegetable] = createStore<VegetableForm>({ name: "" });
 
   function onSubmit(e: Event) {
@@ -17,7 +14,6 @@ const VegetableForm: Component<VegetableFormParams> = (
       name: vegetable.name,
     });
     setVegetable({ name: "" } as Vegetable);
-    props.refetch();
   }
 
   function onChange(e: Event) {
