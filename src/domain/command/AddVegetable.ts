@@ -1,17 +1,25 @@
 import { VegetableRepository } from "../../domain/model/Vegetable";
-import { Command, CommandEvent } from "../../core";
-import { v4 as uuid } from "uuid";
+import { Command, CommandEvent, PermaUtils } from "../../core";
 
 export class AddVegetable implements Command<{ name: string }> {
   private repository: VegetableRepository;
+  private permaUtils: PermaUtils;
 
-  constructor(vegetableRepository: VegetableRepository) {
+  constructor(
+    vegetableRepository: VegetableRepository,
+    permaUtils: PermaUtils
+  ) {
     this.repository = vegetableRepository;
+    this.permaUtils = permaUtils;
   }
 
   async execute(param: { name: string }): Promise<CommandEvent> {
-    const id = uuid();
-    await this.repository.add({ id: { id }, name: param.name, type: "annual" });
+    await this.repository.add({
+      id: { id: this.permaUtils.getNewId() },
+      name: param.name,
+      type: "annual",
+      seedingDate: this.permaUtils.getNewDate(),
+    });
     return { name: "added" };
   }
 }

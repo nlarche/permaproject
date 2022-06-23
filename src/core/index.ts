@@ -20,3 +20,8 @@ export interface Topic {
   event: string;
   handler: () => void;
 }
+
+export interface PermaUtils {
+  getNewDate: () => number;
+  getNewId: () => string;
+}
