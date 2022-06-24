@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <label>
+    Name:
+    <input type="text" [(ngModel)]="vegetable.name" name="name"/>
+  </label>
+  <button type="submit">Add</button>
+</form>

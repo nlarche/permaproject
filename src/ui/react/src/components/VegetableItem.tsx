@@ -1,12 +1,13 @@
-import { Vegetable, VegetableId } from "../../../../domain/model/Vegetable";
+import { Vegetable } from "../../../../domain/model/Vegetable";
 import { handleCommand } from "../hexagone";
+import type { RemoveVegetable } from "../../../../domain/command/RemoveVegetable";
 
 type VegetableItemParams = { vegetable: Vegetable };
 export default function VegetableItem(props: VegetableItemParams) {
   const { vegetable } = props;
 
   function remove(v: Vegetable) {
-    handleCommand<VegetableId>("RemoveVegetable", v.id);
+    handleCommand<RemoveVegetable>("RemoveVegetable", v.id);
   }
 
   return (

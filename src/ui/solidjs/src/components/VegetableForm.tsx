@@ -2,6 +2,7 @@ import { Component } from "solid-js";
 import { Vegetable } from "../../../../domain/model/Vegetable";
 import { createStore } from "solid-js/store";
 import { handleCommand } from "../hexagone";
+import type { AddVegetable } from "../../../../domain/command/AddVegetable";
 
 type VegetableForm = Pick<Vegetable, "name">;
 
@@ -10,7 +11,7 @@ const VegetableForm: Component = () => {
 
   function onSubmit(e: Event) {
     e.preventDefault();
-    handleCommand("AddVegetable", {
+    handleCommand<AddVegetable>("AddVegetable", {
       name: vegetable.name,
     });
     setVegetable({ name: "" } as Vegetable);
