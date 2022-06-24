@@ -1,12 +1,5 @@
 import { CommandEvent, EventBus, Topic } from "./index";
-import {
-  BehaviorSubject,
-  filter,
-  map,
-  mergeAll,
-  tap,
-  withLatestFrom,
-} from "rxjs";
+import { BehaviorSubject, filter, map, mergeAll, withLatestFrom } from "rxjs";
 
 export class Observable implements EventBus {
   private topics: BehaviorSubject<Topic[]>;
@@ -21,11 +14,15 @@ export class Observable implements EventBus {
       .pipe(
         withLatestFrom(this.topics),
         map(([event, topics]) =>
-          topics.filter((topic) => topic.event === event.name)
+          topics
+            .filter((topic) => topic.event === event.name)
+            .map((topic) => {
+              topic.handler && topic.handler(event.payload);
+              return topic;
+            })
         ),
         mergeAll(),
-        filter((topic) => !!topic),
-        tap((topic) => topic.handler && topic.handler())
+        filter((topic) => !!topic)
       )
       .subscribe({ next: (e) => console.log("trigger event: ", e.event) });
   }

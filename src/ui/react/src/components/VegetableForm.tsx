@@ -1,10 +1,17 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Vegetable } from "../../../../domain/model/Vegetable";
-import { handleCommand } from "../hexagone";
+import { eventBus, handleCommand } from "../hexagone";
 import type { AddVegetable } from "../../../../domain/command/AddVegetable";
 
 export default function VegetableForm(): JSX.Element {
   const [vegetable, setVegetable] = useState({ name: "" } as Vegetable);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    eventBus.subscribe("error", (payload: any) => {
+      setError(payload.message);
+    });
+  }, []);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -23,6 +30,7 @@ export default function VegetableForm(): JSX.Element {
       <label>
         Name:
         <input type="text" value={vegetable.name} onChange={onChange} />
+        <p>{error}</p>
       </label>
       <button type="submit">Add</button>
     </form>

@@ -2,6 +2,7 @@
   <label>
     Name:
     <input type="text" [(ngModel)]="vegetable.name" name="name"/>
+    <p>{{error | async}}</p>
   </label>
   <button type="submit">Add</button>
 </form>

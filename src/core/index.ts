@@ -4,6 +4,7 @@ export interface Query<T, R> {
 
 export interface CommandEvent {
   name: string;
+  payload?: any;
 }
 
 export interface Command<T> {
@@ -11,14 +12,14 @@ export interface Command<T> {
 }
 
 export interface EventBus {
-  subscribe(event: string, handler: () => void): void;
+  subscribe(event: string, handler: (payload?: any) => void): void;
 
   dispatch(event: CommandEvent): void;
 }
 
 export interface Topic {
   event: string;
-  handler: () => void;
+  handler: (payload: unknown) => void;
 }
 
 export interface PermaUtils {

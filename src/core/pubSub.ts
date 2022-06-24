@@ -17,7 +17,7 @@ export class PubSub implements EventBus {
     console.log("subscribers", this.handlers.size);
     this.handlers.forEach((topic) => {
       if (topic.event === event.name) {
-        topic.handler();
+        topic.handler(event.payload);
       }
     });
   }

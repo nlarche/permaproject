@@ -14,6 +14,12 @@ export class AddVegetable implements Command<{ name: string }> {
   }
 
   async execute(param: { name: string }): Promise<CommandEvent> {
+    if (!param.name.length) {
+      return {
+        name: "error",
+        payload: { field: "name", message: "name is mandatory" },
+      };
+    }
     await this.repository.add({
       id: { id: this.permaUtils.getNewId() },
       name: param.name,
