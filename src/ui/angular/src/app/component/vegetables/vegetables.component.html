@@ -1,0 +1,6 @@
+<app-vegetable-form></app-vegetable-form>
+<ul>
+  <li *ngFor="let veg of list$ | async">
+    <app-vegetable-item [vegetable]="veg"></app-vegetable-item>
+  </li>
+</ul>

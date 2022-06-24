@@ -1,10 +1,10 @@
 import { eventBus, handleQuery } from "../hexagone";
-import { Vegetable } from "../../../../domain/model/Vegetable";
 import { createResource } from "solid-js";
+import type { ListVegetablesQuery } from "../../../../domain/query/ListVegetablesQuery";
 
 export function createVegetableResource() {
   const [data, { mutate, refetch }] = createResource(() =>
-    handleQuery<Vegetable[], undefined>("ListVegetablesQuery", undefined)
+    handleQuery<ListVegetablesQuery>("ListVegetablesQuery", undefined)
   );
   eventBus.subscribe("removed", refetch);
   eventBus.subscribe("added", refetch);

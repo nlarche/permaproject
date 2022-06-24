@@ -1,13 +1,14 @@
 import { FormEvent, useState } from "react";
 import { Vegetable } from "../../../../domain/model/Vegetable";
 import { handleCommand } from "../hexagone";
+import type { AddVegetable } from "../../../../domain/command/AddVegetable";
 
 export default function VegetableForm(): JSX.Element {
   const [vegetable, setVegetable] = useState({ name: "" } as Vegetable);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    handleCommand("AddVegetable", {
+    handleCommand<AddVegetable>("AddVegetable", {
       name: vegetable.name,
     });
     setVegetable({ name: "" } as Vegetable);

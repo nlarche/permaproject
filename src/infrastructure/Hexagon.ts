@@ -9,6 +9,10 @@ export type VegetableQueries = "ListVegetablesQuery";
 
 export type VegetableCommands = "AddVegetable" | "RemoveVegetable";
 
+type CommandParams<T> = T extends Command<infer U> ? U : never;
+type QueryParams<T> = T extends Query<infer P, infer R> ? P : never;
+type QueryResponse<T> = T extends Query<infer P, infer R> ? R : never;
+
 export default function Hexagon(
   eventBus: EventBus,
   vegetableRepository: VegetableRepository
@@ -25,15 +29,20 @@ export default function Hexagon(
     RemoveVegetable: new RemoveVegetable(vegetableRepository),
   };
 
-  function handleCommand<T>(command: VegetableCommands, params: T) {
+  function handleCommand<T>(
+    command: VegetableCommands,
+    params: CommandParams<T>
+  ) {
     domainCommands[command].execute(params).then((r) => eventBus.dispatch(r));
   }
 
-  async function handleQuery<T, P>(
+  async function handleQuery<T>(
     query: VegetableQueries,
-    params: P
-  ): Promise<T> {
-    return (await domainQueries[query].execute(params)) as T;
+    params: QueryParams<T>
+  ): Promise<QueryResponse<T>> {
+    return (await domainQueries[query].execute(params)) as Promise<
+      QueryResponse<T>
+    >;
   }
 
   return {

@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
-import { Vegetable, VegetableId } from "../../../../domain/model/Vegetable";
+import { Vegetable } from "../../../../domain/model/Vegetable";
 import { handleCommand } from "../hexagone";
+import type { RemoveVegetable } from "../../../../domain/command/RemoveVegetable";
 
 type VegetableComponentType = { vegetable: Vegetable };
 
@@ -8,7 +9,7 @@ const VegetableItem: Component<VegetableComponentType> = (
   props: VegetableComponentType
 ) => {
   function remove(v: Vegetable) {
-    handleCommand<VegetableId>("RemoveVegetable", v.id);
+    handleCommand<RemoveVegetable>("RemoveVegetable", v.id);
   }
 
   const { vegetable } = props;
