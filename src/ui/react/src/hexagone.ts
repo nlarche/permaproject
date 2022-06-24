@@ -1,6 +1,6 @@
 import Hexagon from "../../../infrastructure/Hexagon";
 import { Observable } from "../../../core/observable";
-import { LocalStorageVegetableRepository } from "../../../infrastructure/vegetable/LocalStorageVegetableRepository";
+import { FirebaseRepository } from "../../../infrastructure/vegetable/FirebaseRepository";
 
 export const observable = new Observable();
 
@@ -11,7 +11,7 @@ export const observable = new Observable();
 
 const { eventBus, handleQuery, handleCommand } = Hexagon(
   observable,
-  new LocalStorageVegetableRepository()
+  new FirebaseRepository()
 );
 
 export { eventBus, handleQuery, handleCommand };
